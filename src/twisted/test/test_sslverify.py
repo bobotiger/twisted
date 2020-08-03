@@ -325,7 +325,7 @@ def loopbackTLSConnection(trustRoot, privateKeyFile, chainedCertFile=None):
     @return: 3-tuple of server-protocol, client-protocol, and L{IOPump}
     @rtype: L{tuple}
     """
-    class ContextFactory(object):
+    class ContextFactory:
         def getContext(self):
             """
             Create a context for the server side of the connection.
@@ -443,7 +443,7 @@ class WritingProtocol(protocol.Protocol):
 
 
 
-class FakeContext(object):
+class FakeContext:
     """
     Introspectable fake of an C{OpenSSL.SSL.Context}.
 
@@ -647,7 +647,7 @@ class ClientOptionsTests(SynchronousTestCase):
 
 
 
-class FakeChooseDiffieHellmanEllipticCurve(object):
+class FakeChooseDiffieHellmanEllipticCurve:
     """
     A fake implementation of L{_ChooseDiffieHellmanEllipticCurve}
     """
@@ -668,7 +668,7 @@ class FakeChooseDiffieHellmanEllipticCurve(object):
 
 
 
-class OpenSSLOptionsTestsMixin(object):
+class OpenSSLOptionsTestsMixin:
     """
     A mixin for L{OpenSSLOptions} test cases creates client and server
     certificates, signs them with a CA, and provides a L{loopback}
@@ -945,7 +945,7 @@ class OpenSSLOptionsTests(OpenSSLOptionsTestsMixin, TestCase):
         If acceptable ciphers are passed, they are used.
         """
         @implementer(interfaces.IAcceptableCiphers)
-        class FakeAcceptableCiphers(object):
+        class FakeAcceptableCiphers:
             def selectCiphers(self, _):
                 return [sslverify.OpenSSLCipher(u'sentinel')]
 
@@ -1340,7 +1340,7 @@ class OpenSSLOptionsTests(OpenSSLOptionsTestsMixin, TestCase):
         """
         If C{dhParams} is set, they are loaded into each new context.
         """
-        class FakeDiffieHellmanParameters(object):
+        class FakeDiffieHellmanParameters:
             _dhFile = FilePath(b'dh.params')
 
         dhParams = FakeDiffieHellmanParameters()
@@ -2226,7 +2226,7 @@ class ServiceIdentityTests(SynchronousTestCase):
         matches and raising L{VerificationError} if it doesn't.
         """
         name = 'something.example.com'
-        class Connection(object):
+        class Connection:
             def get_peer_certificate(self):
                 """
                 Fake of L{OpenSSL.SSL.Connection.get_peer_certificate}.
@@ -2750,7 +2750,7 @@ class OpenSSLCipherTests(TestCase):
         If ciphers have the same name but different types, they're still
         different.
         """
-        class DifferentCipher(object):
+        class DifferentCipher:
             fullName = self.cipherName
 
         self.assertNotEqual(
@@ -2872,7 +2872,7 @@ class DiffieHellmanParametersTests(TestCase):
 
 
 
-class FakeLibState(object):
+class FakeLibState:
     """
     State for L{FakeLib}
 
@@ -2897,7 +2897,7 @@ class FakeLibState(object):
 
 
 
-class FakeLib(object):
+class FakeLib:
     """
     An introspectable fake of cryptography's lib object.
 
@@ -2968,7 +2968,7 @@ class FakeLibTests(TestCase):
 
 
 
-class FakeCryptoState(object):
+class FakeCryptoState:
     """
     State for L{FakeCrypto}
 
@@ -3000,7 +3000,7 @@ class FakeCryptoState(object):
 
 
 
-class FakeCrypto(object):
+class FakeCrypto:
     """
     An introspectable fake of pyOpenSSL's L{OpenSSL.crypto} module.
 
